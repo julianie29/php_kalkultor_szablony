@@ -1,0 +1,71 @@
+{extends file="../templates/main.html"}
+
+{block name=footer}
+<div id="copyright">
+    <ul><li>Strona oparta na szablonie:  <a href="https://html5up.net">HTML5 UP</a></li><li> autor: Julia Niedziela</li></ul>
+</div>
+{/block}
+
+{block name=content}
+
+<!-- Main -->
+<div id="main">
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+            <form method="post" action="{$app_url}/app/calc.php" >
+                <div class="field">
+                    <label for="id_value">Kwota kredytu</label>
+                    <input type="text" name="value" id="id_value" /><br/>
+                </div>
+                <div class="field">
+                    <label for="id_time">Okres(w latach)</label>
+                    <input type="text" name="time" id="id_time" /><br/>
+                </div>
+                <div class="field">
+                    <label for="id_interest">Oprocentowanie</label>
+                    <input type="text" name="interest" id="id_interest" /><br/>
+                </div>
+
+                <ul class="actions">
+                    <li><input type="submit"  value="Oblicz" /></li>
+                </ul>
+             </form>
+        </div>
+
+
+        <div class="col-6 col-12-xsmall">
+            {* wyświeltenie listy błędów, jeśli istnieją *}
+
+            {if isset($messages)}
+            {if count($messages) > 0}
+            <blockquote>
+                <h4>Wystąpiły błędy: </h4>
+                <ol class="err">
+                    {foreach  $messages as $msg}
+                    {strip}
+                    <li>{$msg}</li>
+                    {/strip}
+                    {/foreach}
+                </ol>
+            </blockquote>
+            {/if}
+            {/if}
+
+
+            {if isset($result)}
+            {if $result >= 0}
+            <blockquote>
+                <h4>Wynik</h4>
+                <p class="res">
+                    {$result}
+                </p>
+            </blockquote>
+            {/if}
+            {/if}
+        </div>
+    </div>
+
+</div>
+<!--</div>-->
+
+{/block}
